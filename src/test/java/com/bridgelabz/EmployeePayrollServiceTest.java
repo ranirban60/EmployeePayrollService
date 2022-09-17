@@ -43,4 +43,5 @@ public class EmployeePayrollServiceTest {
         boolean result = employeePayrollService.checkEmployeePayrollINSyncWithDB("Terisa");
         Assert.assertTrue(result);
     }
+
 }
