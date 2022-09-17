@@ -3,7 +3,9 @@ package com.bridgelabz;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmployeePayrollDBService {
     private PreparedStatement employeePayrollDataStatement;
@@ -33,12 +35,29 @@ public class EmployeePayrollDBService {
         return this.getEmployeePayrollDataUsingDB(sql);
     }
 
-//
-//    public List<EmployeePayrollData> getEmployeePayrollForDataRange(LocalDate startDate, LocalDate endDate) {
-//        String sql = String.format("SELECT * FROM employee_payroll WHERE START BETWEEN '%s' AND '%s'; ",
-//                Date.valueOf(startDate), Date.valueOf(endDate));
-//        return this.getEmployeePayrollDataUsingDB(sql);
-//    }
+
+    public List<EmployeePayrollData> getEmployeePayrollForDateRange(LocalDate startDate, LocalDate endDate) {
+        String sql = String.format("SELECT * FROM employee_payroll WHERE startDate BETWEEN '%s' AND '%s'; ",
+                                    Date.valueOf(startDate), Date.valueOf(endDate));
+        return this.getEmployeePayrollDataUsingDB(sql);
+    }
+
+    public Map<String, Double> getAverageSalaryByGender() {
+        String sql = "SELECT gender, AVG(salary) AS avg_salary FROM employee_payroll GROUP BY gender;";
+        Map<String, Double> genderToAverageSalaryMap = new HashMap<>();
+        try (Connection connection = this.getConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String gender = resultSet.getString("gender");
+                double salary = resultSet.getDouble("avg_salary");
+                genderToAverageSalaryMap.put(gender,salary);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+     return genderToAverageSalaryMap;
+    }
     private List<EmployeePayrollData> getEmployeePayrollDataUsingDB(String sql) {
         List<EmployeePayrollData> employeePayrollList = new ArrayList<>();
         try {
@@ -109,6 +128,5 @@ public class EmployeePayrollDBService {
         }
        return 0;
     }
-
 
 }

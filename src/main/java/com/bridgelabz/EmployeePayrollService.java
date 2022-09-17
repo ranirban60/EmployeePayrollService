@@ -1,15 +1,16 @@
 package com.bridgelabz;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class EmployeePayrollService {
 
-    private double startDate;
-
     public enum IOService {CONSOLE_IO,FILE_IO, DB_IO, REST_IO}
     private List<EmployeePayrollData> employeePayrollList;
+
     private EmployeePayrollDBService employeePayrollDBService;
 
     public EmployeePayrollService() {
@@ -47,9 +48,21 @@ public class EmployeePayrollService {
             if (ioService.equals(IOService.DB_IO))
                 this.employeePayrollList = employeePayrollDBService.readData();
             return this.employeePayrollList;
-            }
+        }
 
-        public boolean checkEmployeePayrollINSyncWithDB(String name) {
+        public List<EmployeePayrollData> readEmployeePayrollForDateRange(IOService ioService, LocalDate startDate, LocalDate endDate) {
+            if (ioService.equals(IOService.DB_IO))
+                return employeePayrollDBService.getEmployeePayrollForDateRange(startDate, endDate);
+        return null;
+        }
+
+        public Map<String, Double> readAverageSalaryByGender(IOService ioService) {
+            if (ioService.equals(IOService.DB_IO))
+                return employeePayrollDBService.getAverageSalaryByGender();
+            return null;
+        }
+
+    public boolean checkEmployeePayrollINSyncWithDB(String name) {
         List<EmployeePayrollData> employeePayrollDataList = employeePayrollDBService.getEmployeePayrollData(name);
         return employeePayrollDataList.get(0).equals(getEmployeePayrollData(name));
         }
@@ -61,7 +74,7 @@ public class EmployeePayrollService {
             if (employeePayrollData != null ) employeePayrollData.salary = salary;
         }
 
-    private EmployeePayrollData getEmployeePayrollData(String name) {
+        private EmployeePayrollData getEmployeePayrollData(String name) {
             return this.employeePayrollList.stream()
                     .filter(employeePayrollDataItem ->  employeePayrollDataItem.name.equals(name))
                     .findFirst()
