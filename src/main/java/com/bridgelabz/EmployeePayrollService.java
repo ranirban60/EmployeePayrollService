@@ -54,7 +54,6 @@ public class EmployeePayrollService {
         return employeePayrollDataList.get(0).equals(getEmployeePayrollData(name));
     }
 
-
     public void updateEmployeeSalary(String name, double salary) {
             int result = employeePayrollDBService.updateEmployeeData(name, salary);
             if( result == 0 ) return;
