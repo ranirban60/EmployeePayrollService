@@ -26,7 +26,7 @@ public class EmployeePayrollServiceTest {
         Assert.assertEquals(3, entries);
     }
 
-    //UC2
+   // UC2
     @Test
     public void givenEmployeePayrollInDB_WhenRetrieved_ShouldMatchEmployeeCount() {
         EmployeePayrollService employeePayrollService = new EmployeePayrollService();
