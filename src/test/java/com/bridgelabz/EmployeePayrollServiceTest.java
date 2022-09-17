@@ -35,6 +35,7 @@ public class EmployeePayrollServiceTest {
     }
 
     //UC3
+    //UC4
     @Test
     public void givenNewSalaryForEmployee_WhenUpdated_ShouldSyncWithDB(){
         EmployeePayrollService employeePayrollService = new EmployeePayrollService();

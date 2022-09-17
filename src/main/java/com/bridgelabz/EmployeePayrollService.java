@@ -19,16 +19,16 @@ public class EmployeePayrollService {
     public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList){
         this();
         this.employeePayrollList = employeePayrollList;
-        }
+    }
 
-        public static void main(String[] args) {
-            System.out.println("Welcome to Employee Payroll Service");
-            ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<>();
-            EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
-            Scanner consoleInputReader = new Scanner(System.in);
-            employeePayrollService.readEmployeePayrollData(consoleInputReader);
-            employeePayrollService.writeEmployeePayrollData(IOService.CONSOLE_IO);
-        }
+    public static void main(String[] args) {
+        System.out.println("Welcome to Employee Payroll Service");
+        ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<>();
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
+        Scanner consoleInputReader = new Scanner(System.in);
+        employeePayrollService.readEmployeePayrollData(consoleInputReader);
+        employeePayrollService.writeEmployeePayrollData(IOService.CONSOLE_IO);
+    }
         /**
          * This method reads the data from user
          * @param consoleInputReader input from console
@@ -49,12 +49,12 @@ public class EmployeePayrollService {
             return this.employeePayrollList;
             }
 
-    public boolean checkEmployeePayrollINSyncWithDB(String name) {
+        public boolean checkEmployeePayrollINSyncWithDB(String name) {
         List<EmployeePayrollData> employeePayrollDataList = employeePayrollDBService.getEmployeePayrollData(name);
         return employeePayrollDataList.get(0).equals(getEmployeePayrollData(name));
-    }
+        }
 
-    public void updateEmployeeSalary(String name, double salary) {
+        public void updateEmployeeSalary(String name, double salary) {
             int result = employeePayrollDBService.updateEmployeeData(name, salary);
             if( result == 0 ) return;
             EmployeePayrollData employeePayrollData = this.getEmployeePayrollData(name);
