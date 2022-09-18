@@ -72,6 +72,7 @@ public class EmployeePayrollServiceTest {
     }
 
     //UC7
+    //UC8
     @Test
     public void givenNewEmployee_WhenAdded_ShouldSyncWithDB(){
         EmployeePayrollService employeePayrollService = new EmployeePayrollService();
