@@ -3,6 +3,7 @@ package com.bridgelabz;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -74,11 +75,11 @@ public class EmployeePayrollServiceTest {
     //UC7
     //UC8
     @Test
-    public void givenNewEmployee_WhenAdded_ShouldSyncWithDB(){
+    public void givenNewEmployee_WhenAdded_ShouldSyncWithDB() throws SQLException {
         EmployeePayrollService employeePayrollService = new EmployeePayrollService();
         employeePayrollService.readEmployeePayrollData(DB_IO);
-        employeePayrollService.addEmployeeToPayroll("Mark",4000000.00, LocalDate.now(),"M");
-        boolean result = employeePayrollService.checkEmployeePayrollInSyncWithDB("Mark");
+        employeePayrollService.addEmployeeToPayroll("Jack",7000000.00, LocalDate.now(),"M");
+        boolean result = employeePayrollService.checkEmployeePayrollInSyncWithDB("Jack");
         Assert.assertTrue(result);
     }
 

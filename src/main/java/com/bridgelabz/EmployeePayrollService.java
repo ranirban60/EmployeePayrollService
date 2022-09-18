@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,7 @@ public class EmployeePayrollService {
                     .orElse(null);
         }
 
-         public void addEmployeeToPayroll(String name, double salary, LocalDate startDate, String gender) {
+         public void addEmployeeToPayroll(String name, double salary, LocalDate startDate, String gender) throws SQLException {
             employeePayrollList.add(employeePayrollDBService.addEmployeeToPayroll(name, salary, startDate, gender));
         }
 
