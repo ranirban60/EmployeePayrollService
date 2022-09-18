@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class EmployeePayrollService {
 
+
     public enum IOService {CONSOLE_IO,FILE_IO, DB_IO, REST_IO}
     private List<EmployeePayrollData> employeePayrollList;
 
@@ -62,7 +63,7 @@ public class EmployeePayrollService {
             return null;
         }
 
-    public boolean checkEmployeePayrollINSyncWithDB(String name) {
+    public boolean checkEmployeePayrollInSyncWithDB(String name) {
         List<EmployeePayrollData> employeePayrollDataList = employeePayrollDBService.getEmployeePayrollData(name);
         return employeePayrollDataList.get(0).equals(getEmployeePayrollData(name));
         }
@@ -79,9 +80,13 @@ public class EmployeePayrollService {
                     .filter(employeePayrollDataItem ->  employeePayrollDataItem.name.equals(name))
                     .findFirst()
                     .orElse(null);
-    }
+        }
 
-    /**
+         public void addEmployeeToPayroll(String name, double salary, LocalDate startDate, String gender) {
+            employeePayrollList.add(employeePayrollDBService.addEmployeeToPayroll(name, salary, startDate, gender));
+        }
+
+        /**
          * This method writes the user data in console
          */
        public void writeEmployeePayrollData(IOService  ioService) {
@@ -92,13 +97,13 @@ public class EmployeePayrollService {
             }
         }
 
-        public void printData(IOService ioService) {
+       public void printData(IOService ioService) {
             if(ioService.equals((IOService.FILE_IO)))
                 new EmployeePayrollFileIOService().printData();
-        }
-        public long countEntries(IOService ioService) {
+       }
+       public long countEntries(IOService ioService) {
             if(ioService.equals((IOService.FILE_IO)))
                 return  new EmployeePayrollFileIOService().countEntries();
             return 0;
-        }
+       }
     }

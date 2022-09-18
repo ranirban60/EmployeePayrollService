@@ -12,12 +12,13 @@ import static com.bridgelabz.EmployeePayrollService.IOService.DB_IO;
 
 
 public class EmployeePayrollServiceTest {
+
     @Test
     public void given3EmployeesWhenWrittenToFileShouldWatchEmployeeEntries(){
         EmployeePayrollData[] arrayOfEmps = new EmployeePayrollData[]{
                 new EmployeePayrollData(1, "Devid", 100000.0),
                 new EmployeePayrollData(2, "Prince", 200000.0),
-                new EmployeePayrollData(3, "Terisa", 300000.0)
+                new EmployeePayrollData(3, "Peter", 300000.0)
         };
         EmployeePayrollService employeePayrollService;
         employeePayrollService = new EmployeePayrollService(Arrays.asList(arrayOfEmps));
@@ -44,7 +45,7 @@ public class EmployeePayrollServiceTest {
         EmployeePayrollService employeePayrollService = new EmployeePayrollService();
         employeePayrollService.readEmployeePayrollData(DB_IO);
         employeePayrollService.updateEmployeeSalary("Terisa",3000000.00);
-        boolean result = employeePayrollService.checkEmployeePayrollINSyncWithDB("Terisa");
+        boolean result = employeePayrollService.checkEmployeePayrollInSyncWithDB("Terisa");
         Assert.assertTrue(result);
     }
 
@@ -69,4 +70,16 @@ public class EmployeePayrollServiceTest {
         Assert.assertTrue(averageSalaryByGender.get("M").equals(3000000.0) &&
                 averageSalaryByGender.get("F").equals(3000000.0));
     }
+
+    //UC7
+    @Test
+    public void givenNewEmployee_WhenAdded_ShouldSyncWithDB(){
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+        employeePayrollService.readEmployeePayrollData(DB_IO);
+        employeePayrollService.addEmployeeToPayroll("Mark",5000000.00, LocalDate.now(),"M");
+        boolean result = employeePayrollService.checkEmployeePayrollInSyncWithDB("Mark");
+        Assert.assertTrue(result);
+    }
+
+
 }
