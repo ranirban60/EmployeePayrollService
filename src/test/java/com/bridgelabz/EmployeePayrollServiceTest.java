@@ -55,7 +55,7 @@ public class EmployeePayrollServiceTest {
     public void givenDataRange_WhenRetrieved_ShouldMatchEmployeeCount(){
         EmployeePayrollService employeePayrollService = new EmployeePayrollService();
         employeePayrollService.readEmployeePayrollData(DB_IO);
-        LocalDate startDate = LocalDate.of(2021,07,30);
+        LocalDate startDate = LocalDate.of(2021, 8,30);
         LocalDate endDate = LocalDate.now();
         List<EmployeePayrollData> employeePayrollData =
                 employeePayrollService.readEmployeePayrollForDateRange(DB_IO,startDate,endDate);
@@ -75,11 +75,11 @@ public class EmployeePayrollServiceTest {
     //UC7
     //UC8
     @Test
-    public void givenNewEmployee_WhenAdded_ShouldSyncWithDB() throws SQLException {
+    public void givenNewEmployee_WhenAdded_ShouldSyncWithDB(){
         EmployeePayrollService employeePayrollService = new EmployeePayrollService();
         employeePayrollService.readEmployeePayrollData(DB_IO);
-        employeePayrollService.addEmployeeToPayroll("Jack",7000000.00, LocalDate.now(),"M");
-        boolean result = employeePayrollService.checkEmployeePayrollInSyncWithDB("Jack");
+        employeePayrollService.addEmployeeToPayroll("Peter",7000000.00, LocalDate.now(),"M");
+        boolean result = employeePayrollService.checkEmployeePayrollInSyncWithDB("Peter");
         Assert.assertTrue(result);
     }
 

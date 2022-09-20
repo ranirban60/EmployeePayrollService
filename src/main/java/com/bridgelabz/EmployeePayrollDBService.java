@@ -131,8 +131,8 @@ public class EmployeePayrollDBService {
        return 0;
     }
 
-//    UC7
-//    public EmployeePayrollData addEmployeeToPayrollUC7(String name, double salary, LocalDate startDate, String gender) {
+    //UC7
+//    public EmployeePayrollData addEmployeeToPayroll(String name, double salary, LocalDate startDate, String gender) {
 //        int employeeId = -1;
 //        EmployeePayrollData employeePayrollData = null;
 //        String sql = String.format(" INSERT INTO employee_payroll (name, gender, salary, startDate)" +
@@ -153,7 +153,7 @@ public class EmployeePayrollDBService {
 //    }
 
     //UC8
-    public EmployeePayrollData addEmployeeToPayroll(String name, double salary, LocalDate startDate, String gender) throws SQLException {
+    public EmployeePayrollData addEmployeeToPayroll(String name, double salary, LocalDate startDate, String gender) {
         int employeeId = -1;
         Connection connection = null;
         EmployeePayrollData employeePayrollData = null;

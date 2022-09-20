@@ -1,6 +1,5 @@
 package com.bridgelabz;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +9,10 @@ import java.util.Scanner;
 public class EmployeePayrollService {
 
 
-    public enum IOService {CONSOLE_IO,FILE_IO, DB_IO, REST_IO}
+    public enum IOService {CONSOLE_IO,FILE_IO, DB_IO}
     private List<EmployeePayrollData> employeePayrollList;
 
-    private EmployeePayrollDBService employeePayrollDBService;
+    private final EmployeePayrollDBService employeePayrollDBService;
 
     public EmployeePayrollService() {
         employeePayrollDBService = EmployeePayrollDBService.getInstance();
@@ -83,7 +82,7 @@ public class EmployeePayrollService {
                     .orElse(null);
         }
 
-         public void addEmployeeToPayroll(String name, double salary, LocalDate startDate, String gender) throws SQLException {
+         public void addEmployeeToPayroll(String name, double salary, LocalDate startDate, String gender) {
             employeePayrollList.add(employeePayrollDBService.addEmployeeToPayroll(name, salary, startDate, gender));
         }
 

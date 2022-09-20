@@ -21,14 +21,14 @@ public class EmployeePayrollData {
     }
 
     public EmployeePayrollData(int id, String name, String gender, double salary,LocalDate startDate) {
-        this(id, name , salary,startDate);
+        this(id, name , salary, startDate);
         this.gender = gender;
     }
 
     /**
      * String class represents character String
      *
-     * @Override toString in class object
+     * Override toString in class object
      */
     @Override
     public String toString() {
